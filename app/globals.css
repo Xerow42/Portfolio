@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --color-paper: #f4f5f1;
+  --color-surface: #ffffff;
+  --color-ink: #14181c;
+  --color-muted: #5b6258;
+  --color-border: #dfe1da;
+  --color-accent: #1f3b5c;
+  --color-accent-soft: #e7edf2;
+  --color-signal: #2f6e5c;
+  --color-code-bg: #12161b;
+  --color-code-ink: #e7eae4;
+  --color-code-accent: #7fd9be;
+  --color-code-accent-2: #e3b866;
+
+  /* Muted, desaturated accents used only to color-code the six skill
+     categories (badges + a thin top rule per card). Kept low-saturation so
+     they read as one cohesive family rather than a rainbow of tags. */
+  --color-cat-languages: #1f3b5c;
+  --color-cat-frontend: #2f6e5c;
+  --color-cat-backend: #8a5a3b;
+  --color-cat-data: #3d5a80;
+  --color-cat-ai: #6b4c8a;
+  --color-cat-tools: #4a6a4d;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    background-image: radial-gradient(circle, rgba(20, 24, 28, 0.08) 1px, transparent 1px);
+    background-size: 22px 22px;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  .prose-body p {
+    max-width: 65ch;
+  }
+
+  /* Small monospace index tag used before a section title, e.g. "01". Decorative
+     numbering only — it never claims a real ranking or sequence. */
+  .index-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.4rem;
+    padding-inline: 0.4rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--color-muted);
+    background-color: var(--color-surface);
+  }
+
+  /* Corner-bracket frame, evokes a targeting/data-panel reticle. CSS-only, no image. */
+  .bracket-frame {
+    position: relative;
+  }
+
+  .bracket-frame::before,
+  .bracket-frame::after {
+    content: "";
+    position: absolute;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-color: var(--color-accent);
+    pointer-events: none;
+  }
+
+  .bracket-frame::before {
+    top: -0.55rem;
+    left: -0.55rem;
+    border-top: 2px solid;
+    border-left: 2px solid;
+  }
+
+  .bracket-frame::after {
+    bottom: -0.55rem;
+    right: -0.55rem;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+  }
+
+  /* Soft radial glow behind the hero only, layered under the global dot-grid
+     for a bit of depth. Single hue, low opacity — not a loud gradient hero. */
+  .hero-glow {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-glow::before {
+    content: "";
+    position: absolute;
+    inset: -10% -10% auto -10%;
+    height: 26rem;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(
+      ellipse 60% 100% at 20% 0%,
+      color-mix(in srgb, var(--color-accent) 10%, transparent),
+      transparent 70%
+    );
+  }
+
+  /* One deliberate dark band, used once for the closing call-to-action, to
+     give the page a moment of real contrast instead of flat paper throughout.
+     Use text-code-ink (optionally with an opacity modifier, e.g.
+     text-code-ink/70) for text inside it rather than text-muted, whose color
+     is tuned for the light background. */
+  .dark-band {
+    background-color: var(--color-code-bg);
+    color: var(--color-code-ink);
+    border-top: 2px solid var(--color-code-accent);
+  }
+}
