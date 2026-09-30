@@ -10,7 +10,7 @@ export const projects: Project[] = [
       "A platform where teachers create multiple-choice exams and scanned answer sheets are graded automatically with computer vision and machine learning.",
     category: ["Full Stack Development", "Artificial Intelligence", "Computer Vision", "Information Systems"],
     tech: ["Next.js", "React", "TypeScript", "FastAPI", "PostgreSQL", "OpenCV", "TensorFlow / Keras", "EasyOCR", "Docker", "Swift"],
-    role: "End-of-year engineering project, team of 4. I built the web application and led the database design; teammates built the FastAPI backend, the AI grading service and the iOS scanning app.",
+    role: "End-of-year engineering project, team of 4. I built the web application and led the database design, while also contributing to AI development and model training on the dataset. Teammates built the FastAPI backend, the AI grading service and the iOS scanning app.",
     timeframe: "2025 – 2026",
     links: [{ label: "GitHub — web app", url: "https://github.com/Xerow42/qcm-corrector-web" }],
     problem: "Grading multiple-choice exams by hand is slow and error-prone, and teachers lack one place to create a QCM, track graded copies and review doubtful results.",
