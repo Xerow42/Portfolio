@@ -59,7 +59,7 @@ export const education: TimelineEntry[] = [
     period: "2022 — 2023",
     title: "Scientific Baccalaureate, Physics-Chemistry (PC) — Highest honours (Mention Très Bien)",
     org: "Lycée Louis-le-Grand",
-    location: "Paris, France",
+    location: "Rabat,Maroc",
     bullets: [],
   },
 ];
