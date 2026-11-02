@@ -15,7 +15,7 @@ export const projects: Project[] = [
     links: [{ label: "GitHub — web app", url: "https://github.com/Xerow42/qcm-corrector-web" }],
     problem: "Grading multiple-choice exams by hand is slow and error-prone, and teachers lack one place to create a QCM, track graded copies and review doubtful results.",
     solution:
-      "Four cooperating parts: a web app to build and publish QCMs and review results, an iOS app to photograph answer sheets, an AI service that reads them, and a FastAPI backend on PostgreSQL.",
+      "Four cooperating parts: a web app to build and publish QCMs,review results and to each student their results VIA email.  an iOS app to photograph answer sheets, an AI service that reads them, and a FastAPI backend on PostgreSQL.",
     features: [
       "QCM editor: up to 60 questions with 4 choices, single or multiple answers, per-question weighting, live completeness check.",
       "Autosave in the browser, explicit draft and publish steps synced with the backend.",
