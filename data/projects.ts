@@ -125,7 +125,7 @@ export const projects: Project[] = [
     title: "DocuMind",
     status: "documented",
     shortDescription:
-      "A resume-classification platform: TF-IDF and classical machine learning sort resumes into 9 job categories, behind a FastAPI backend and a React frontend.",
+      "A resume-classification platform: TF-IDF and classical machine learning sort resumes into 24 professional sectors, behind a FastAPI backend and a React frontend.",
     category: ["Artificial Intelligence", "Machine Learning", "Full Stack Development"],
     tech: ["Python", "FastAPI", "React", "scikit-learn", "TF-IDF", "SQLite", "pdfplumber"],
     role: "Solo project.",
@@ -135,28 +135,32 @@ export const projects: Project[] = [
       "The FastAPI backend extracts text from an uploaded PDF or TXT resume, classifies it with a TF-IDF + classical ML pipeline, extracts keywords and stores each analysis in SQLite. A React frontend covers upload, results and history.",
     features: [
       "Upload validation (type, size, empty file) and safe error messages.",
-      "9 categories: Data Science, Data Engineering, Software Engineering, Web Development, Cybersecurity, Database Administration, DevOps/Cloud, Business Analysis, Human Resources.",
-      "Three models compared on one split (Logistic Regression, Linear SVM, Multinomial Naive Bayes); the best is chosen by macro-F1.",
+      "24 professional sectors (for example Information Technology, HR, Finance, Healthcare, Designer).",
+      "Three models compared (Logistic Regression, Linear SVM, Multinomial Naive Bayes); the best is chosen by 5-fold stratified cross-validation on the training split, scored with macro-F1.",
       "Confidence score with a documented calculation, and keyword extraction from the TF-IDF weights.",
     ],
     architecture:
       "React → FastAPI → independent service modules (text extraction, preprocessing, classification, keywords) → SQLite. Training runs offline; the API only loads the saved model at startup.",
     technicalImplementation: [
       "TF-IDF (5,000 features, unigrams and bigrams) with classical models: fast, explainable, no GPU needed.",
-      "Macro-F1 rather than accuracy, because the source dataset is class-imbalanced.",
+      "Model selection by cross-validation on the training split only; the test split is evaluated once, after selection.",
+      "Job-title ablation to check that the model does not rely on the resume header alone.",
+      "Macro-F1 rather than accuracy, because the sectors are imbalanced (22 to 120 resumes each).",
       "Plain sqlite3 for four small tables; automated tests cover the ML pipeline, database and services.",
     ],
     challenges: [
-      "The public Kaggle resume dataset must be downloaded with a Kaggle account, so the model has not been trained on it yet; the training and evaluation scripts were checked on a small labeled test fixture only.",
-      "The FastAPI routes and the React app have not been run end to end yet.",
+      "The first dataset (962 rows) turned out to hold only 166 unique resumes, which would have inflated every score through train/test duplicates. I switched to a larger dataset (2,482 unique resumes) and removed exact duplicates.",
+      "Labels come from the search category on the source site, not from the resume content, which caps achievable accuracy; classes such as BPO (22 resumes) are poorly learned.",
     ],
     results: [
-      "Complete pipeline, backend services and frontend pages implemented; tests pass on the ML pipeline and service layer.",
-      "No accuracy or F1 figures are published, because training on the real dataset is still to be done.",
+      "Linear SVM selected by cross-validation: macro-F1 0.655 ± 0.016 (5 folds, training split).",
+      "On 497 held-out resumes, evaluated once: macro-F1 0.685, accuracy 0.726.",
+      "Best sectors: Information Technology and Designer (F1 0.91); weakest: BPO (0.00) and Apparel (0.36).",
+      "Without the job title in the resume header, cross-validated macro-F1 is about 0.61 (partial title removal), so the model also uses the resume content.",
     ],
     futureImprovements: [
-      "Train on the full dataset and publish the real macro-F1.",
-      "Run the full stack end to end; add k-fold cross-validation.",
+      "Calibrated probabilities for the SVM scores and hyperparameter search inside cross-validation.",
+      "Merge overlapping sectors (finance, accounting, banking) and run the full stack end to end with CI.",
     ],
   },
   {
