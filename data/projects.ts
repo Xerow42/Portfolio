@@ -273,12 +273,10 @@ export const projects: Project[] = [
     "An AI-powered multilingual CRM developed during an information systems internship, combining complaint management, NLP-based sentiment analysis, automatic translation, and email workflow automation.",
 
   category: [
-    "Full Stack Development",
-    "Artificial Intelligence",
-    "Natural Language Processing",
-    "Information Systems",
-    "Business Process Automation",
-  ],
+  "Full Stack Development",
+  "Artificial Intelligence",
+  "Information Systems",
+],
 
   tech: [
     "Python",
