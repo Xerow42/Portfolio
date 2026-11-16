@@ -264,30 +264,129 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "prescolaire-crm",
-    title: "Complaint-Management CRM",
-    status: "documented",
-    shortDescription:
-      "A CRM built during an information-systems internship to track complaints, with automatic translation, sentiment analysis and e-mail replies.",
-    category: ["Full Stack Development", "Artificial Intelligence", "Information Systems"],
-    tech: ["Python", "Flask", "NLP", "Sentiment Analysis", "SQLite"],
-    role: "IT Intern, Information Systems Department — Fédération Marocaine du Préscolaire (Rabat, Morocco).",
-    timeframe: "2025 · 1 month",
-    links: [{ label: "GitHub", url: "https://github.com/Xerow42/crm" }],
-    problem: "Complaints had no central place to be recorded and tracked, and no simple way to spot which ones were most urgent.",
-    solution: "A Flask CRM that stores complaints in SQLite and uses NLP to translate and score them, then sends replies by e-mail.",
-    features: [
-      "Complaint intake and tracking in a web interface.",
-      "Automatic translation and sentiment analysis of each complaint.",
-      "E-mail replies sent from the application; CSV import of complaint records.",
-    ],
-    technicalImplementation: [
-      "Flask backend with the translation and sentiment steps built into the complaint flow; SQLite for persistence.",
-    ],
-    results: [
-      "A working CRM used during the internship to process and prioritize incoming complaints.",
-    ],
-  },
+  slug: "prescolaire-crm",
+  title: "AI-Powered Complaint Management CRM",
+  status: "documented",
+  featured: false,
+
+  shortDescription:
+    "An AI-powered multilingual CRM developed during an information systems internship, combining complaint management, NLP-based sentiment analysis, automatic translation, and email workflow automation.",
+
+  category: [
+    "Full Stack Development",
+    "Artificial Intelligence",
+    "Natural Language Processing",
+    "Information Systems",
+    "Business Process Automation",
+  ],
+
+  tech: [
+    "Python",
+    "Flask",
+    "SQLite",
+    "Hugging Face Transformers",
+    "NLP",
+    "Sentiment Analysis",
+    "Language Detection",
+    "Deep Translator",
+    "HTML / CSS",
+    "SMTP",
+    "CSV",
+  ],
+
+  role:
+    "IT Intern — Information Systems Department, Fédération Marocaine du Préscolaire (FMPS), Rabat, Morocco. Designed and developed a complaint management application integrating NLP, multilingual communication, and database-backed workflows.",
+
+  timeframe: "2025 · 1 month",
+
+  links: [
+    {
+      label: "GitHub — Source Code",
+      url: "https://github.com/Xerow42/crm",
+    },
+  ],
+
+  problem:
+    "Managing complaints through fragmented processes makes it difficult to centralize requests, understand customer dissatisfaction, and respond efficiently. Multilingual submissions introduce additional challenges, while manual data entry and repetitive email communication increase administrative workload.",
+
+  solution:
+    "Developed a Flask-based CRM that centralizes complaints in a relational SQLite database and integrates NLP directly into the processing workflow. The system automatically detects the language of incoming messages, translates their content, analyzes sentiment using a pretrained Transformer model, and facilitates multilingual email responses through SMTP integration.",
+
+  features: [
+    "Centralized complaint dashboard displaying submitted requests, customer information, complaint categories, and sentiment indicators.",
+
+    "Automated sentiment classification using Hugging Face Transformers, returning positive or negative sentiment labels with confidence scores.",
+
+    "Automatic language identification and multilingual translation of incoming complaints using language detection and translation libraries.",
+
+    "Complaint registration with customer details, categories, original messages, translated content, and sentiment analysis results.",
+
+    "Multilingual email response workflow allowing administrators to compose replies and communicate with customers in their original language.",
+
+    "CSV import pipeline for processing existing complaint records, creating customer and complaint-category entries, and applying NLP analysis.",
+
+    "SQLite-backed persistence with relational tables connecting customers, complaint categories, and complaint records.",
+
+    "Administrative interfaces for registering customers, managing complaint categories, processing requests, and reviewing complaint information.",
+  ],
+
+  architecture:
+    "Lightweight monolithic web architecture built with Python and Flask. Server-rendered HTML templates provide the administrative interface, while Flask handles business logic, database operations, NLP inference, translation, and email communication. SQLite stores relational complaint data. Hugging Face Transformers provides sentiment classification, language-detection and translation libraries support multilingual processing, and SMTP handles outgoing email messages.",
+
+  technicalImplementation: [
+    "Developed a Python Flask application with dedicated routes for complaint registration, processing, customer management, category management, and CSV imports.",
+
+    "Designed an SQLite relational schema linking customers, complaint categories, and complaints through foreign-key relationships.",
+
+    "Integrated a pretrained Hugging Face Transformers sentiment-analysis pipeline to classify complaint text and extract confidence scores.",
+
+    "Implemented multilingual text processing using automatic language detection and translation into French and English for administrative review and NLP inference.",
+
+    "Built a CSV ingestion workflow that parses records, resolves existing customers and categories, and stores complaints with their translated text and sentiment predictions.",
+
+    "Implemented SMTP-based email communication with multilingual response generation and complaint-processing actions.",
+
+    "Developed server-rendered administrative views using Flask templates, HTML, and CSS.",
+  ],
+
+  challenges: [
+    "Integrating NLP inference into a traditional complaint management workflow while maintaining a straightforward administrative interface.",
+
+    "Handling complaints written in different languages and preparing translated text for sentiment classification.",
+
+    "Designing relational database structures that connect customers, complaint categories, and submitted requests.",
+
+    "Coordinating data ingestion, text processing, persistence, and email communication within a single Flask application.",
+
+    "Developing a functional end-to-end prototype within a one-month internship.",
+  ],
+
+  results: [
+    "Delivered a functional CRM prototype combining complaint registration, multilingual processing, sentiment analysis, and administrative review.",
+
+    "Integrated pretrained Transformer-based sentiment analysis into complaint registration and CSV import workflows.",
+
+    "Implemented automatic translation and multilingual email response capabilities to support communication across languages.",
+
+    "Established persistent complaint records and customer-category relationships using SQLite.",
+
+    "Documented the application's architecture, functionality, and user interfaces in a public GitHub repository.",
+  ],
+
+  futureImprovements: [
+    "Introduce authentication and role-based access control for administrative operations.",
+
+    "Implement explicit complaint statuses, assignment workflows, and urgency-based prioritization.",
+
+    "Expand dashboard analytics with sentiment trends, response times, and complaint-resolution metrics.",
+
+    "Add automated tests, stronger input validation, and improved error handling.",
+
+    "Move credentials to environment variables and improve production deployment security.",
+
+    "Containerize the application and introduce CI/CD automation.",
+  ],
+},
   {
     slug: "supratours-crud",
     title: "User-Management Web App",
