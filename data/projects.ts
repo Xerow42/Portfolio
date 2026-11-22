@@ -143,45 +143,125 @@ export const projects: Project[] = [
   ],
 },
   {
-    slug: "dataflow",
-    title: "DataFlow",
-    status: "documented",
-    shortDescription:
-      "A weather-analytics pipeline: real historical data for Lille is validated, cleaned and loaded into PostgreSQL, then served by a FastAPI API to a React dashboard.",
-    category: ["Data Engineering", "Data Science", "Full Stack Development"],
-    tech: ["Python", "Pandas", "PostgreSQL", "FastAPI", "React", "Docker"],
-    role: "Solo project.",
-    links: [{ label: "GitHub", url: "https://github.com/Xerow42/dataflow" }],
-    problem: "Many data-engineering demos are a single notebook reading a CSV. DataFlow shows a full pipeline, from ingestion to dashboard, on a real and reproducible public data source.",
-    solution:
-      "A Python pipeline pulls daily weather from the Open-Meteo archive API (no key required), validates, cleans and transforms it, loads it into PostgreSQL with idempotent upserts, and exposes it through FastAPI to a React + Recharts dashboard.",
-    features: [
-      "Five separate stages: ingest, validate, clean, transform, load.",
-      "Data-quality checks that flag problems instead of silently dropping them: missing fields, bad dates, impossible ranges, duplicates, outliers, single-day gaps.",
-      "Idempotent loading: a unique (location, date) constraint means re-running a range updates rows instead of duplicating them.",
-      "A pipeline_runs table logs every run and feeds the dashboard's data-quality panel.",
-      "Dashboard: city and date filters, KPI cards, temperature trend with 7-day rolling mean, precipitation chart.",
-    ],
-    architecture:
-      "Open-Meteo API → ingestion (raw JSON snapshot) → validation → cleaning → transformation → PostgreSQL → FastAPI (/api/metrics, /api/trends, /api/records) → React dashboard.",
-    technicalImplementation: [
-      "Normalized PostgreSQL schema (locations, daily_weather, pipeline_runs) with indexes on the date columns used by range queries.",
-      "The same aggregations are implemented in pandas inside the API, so one code path serves both SQLite (development) and PostgreSQL.",
-      "Docker Compose for the database, pipeline and dashboard; an offline mode replays a saved snapshot for tests.",
-    ],
-    challenges: [
-      "Missing values that the source does not provide are kept as real NULLs rather than filled in with invented numbers.",
-      "Choosing scope: Spark, Kafka and Airflow are deliberately not used at this scale; the README explains what would change at larger scale.",
-    ],
-    results: [
-      "Full validate → clean → transform → load flow verified on a real 15-day Lille sample; a repeated load produced no duplicate rows.",
-      "Automated tests cover validation, cleaning, transformation and loading.",
-    ],
-    futureImprovements: [
-      "Run the full one-year ingestion and verify the FastAPI + PostgreSQL + React stack end to end.",
-      "Scheduled incremental ingestion and a CI pipeline.",
-    ],
-  },
+  slug: "dataflow",
+  title: "DataFlow",
+  status: "documented",
+
+  shortDescription:
+    "An end-to-end weather analytics platform built with a modular Python ETL pipeline, PostgreSQL, FastAPI, and React. Features automated data-quality checks, reliable analytics, Docker deployment, and CI/CD verification.",
+
+  category: [
+    "Data Engineering",
+    "Data Science",
+    "Full Stack Development"
+  ],
+
+  tech: [
+    "Python",
+    "Pandas",
+    "PostgreSQL",
+    "FastAPI",
+    "React",
+    "Recharts",
+    "Docker",
+    "Nginx",
+    "Pytest",
+    "GitHub Actions"
+  ],
+
+  role:
+    "Solo project — architecture design, ETL development, database modeling, API development, dashboard implementation, automated testing, and deployment.",
+
+  links: [
+    {
+      label: "GitHub",
+      url: "https://github.com/Xerow42/dataflow"
+    }
+  ],
+
+  problem:
+    "Weather data from public APIs is not immediately ready for analysis. Raw observations can contain missing values, inconsistent records, and gaps that lead to misleading statistics. DataFlow addresses these challenges through a reproducible data-engineering workflow, from ingestion and quality control to storage, analytics, and visualization.",
+
+  solution:
+    "Designed and implemented a five-stage Python ETL pipeline that retrieves historical weather observations from Open-Meteo, validates and cleans the data, performs analytical transformations, and loads the results into PostgreSQL using idempotent upserts. A FastAPI backend exposes analytical endpoints consumed by an interactive React and Recharts dashboard. The application is containerized with Docker Compose and supported by automated tests and GitHub Actions.",
+
+  features: [
+    "Modular ETL architecture with five independent stages: ingestion, validation, cleaning, transformation, and loading.",
+
+    "Data-quality validation covering missing fields, invalid dates, incorrect data types, impossible values, duplicate observations, and statistical outliers.",
+
+    "Controlled missing-value handling: isolated temperature gaps can be imputed, while unavailable measurements remain NULL rather than being replaced with fabricated values.",
+
+    "Idempotent PostgreSQL loading with a unique location-date constraint, allowing historical periods to be reprocessed without generating duplicate observations.",
+
+    "Seven-day rolling temperature averages recalculated consistently across stored history, including after partial data reloads.",
+
+    "FastAPI analytics endpoints supporting date filtering, daily and monthly trends, pagination, KPI calculations, and explicit handling of incomplete data.",
+
+    "Interactive React dashboard featuring city selection, date filters, temperature trends, precipitation visualization, KPI cards, and a data-quality monitoring panel.",
+
+    "Execution tracking through a pipeline_runs table recording processing statistics, validation results, and execution status.",
+
+    "Docker Compose deployment with PostgreSQL, FastAPI, and an Nginx-served React frontend, including a reverse proxy for API requests.",
+
+    "Automated Python tests, dependency security audits, and frontend production builds executed through GitHub Actions."
+  ],
+
+  architecture:
+    "Open-Meteo Archive API → Raw JSON snapshots → Python ingestion → Schema and data validation → Cleaning and missing-value handling → Pandas transformations → PostgreSQL → FastAPI analytics endpoints → React/Recharts dashboard. Docker Compose orchestrates the database, API, and frontend, while the ETL pipeline runs on demand.",
+
+  technicalImplementation: [
+    "Designed a normalized PostgreSQL schema with locations, daily_weather, and pipeline_runs tables, including uniqueness constraints and indexes supporting analytical date-range queries.",
+
+    "Implemented a reusable Python data-processing pipeline using Pandas, with validation rules, duplicate detection, controlled imputation, derived weather indicators, and calendar-based rolling averages.",
+
+    "Developed idempotent database operations and transaction handling, including safeguards for concurrent PostgreSQL imports and consistent rolling-average updates.",
+
+    "Implemented analytics using Pandas within FastAPI, maintaining consistent behavior across SQLite for development/testing and PostgreSQL for containerized execution.",
+
+    "Built a React dashboard using Recharts, connected to FastAPI through an Nginx reverse proxy and a same-origin API configuration.",
+
+    "Configured Docker Compose services for PostgreSQL, the backend, and the frontend, with a separate on-demand ETL service and local-only network exposure by default.",
+
+    "Established automated verification using Pytest, GitHub Actions, dependency audits, and production frontend builds."
+  ],
+
+  challenges: [
+    "Preserving data integrity when source measurements are missing: unavailable precipitation values remain NULL, and incomplete totals are not presented as complete measurements.",
+
+    "Maintaining consistent seven-day rolling averages when historical data is imported in separate batches or reprocessed.",
+
+    "Ensuring repeatable ingestion without duplicate database records while handling transaction failures and concurrent imports.",
+
+    "Keeping API analytics consistent across SQLite and PostgreSQL, particularly for date ranges, missing values, and periods without observations.",
+
+    "Integrating PostgreSQL, FastAPI, React, and Nginx into a functional Docker Compose environment."
+  ],
+
+  results: [
+    "Successfully deployed and tested the complete PostgreSQL → FastAPI → React application locally using Docker Compose.",
+
+    "Executed the complete ETL pipeline against a real 15-day historical weather sample for Lille: 15 observations processed, 15 valid records, 15 database writes, and 0 invalid records.",
+
+    "Verified that FastAPI retrieves the ingested observations from PostgreSQL and that the React dashboard correctly displays the resulting analytics and data-quality information.",
+
+    "Passed 42 automated Python tests, including regression coverage for validation, cleaning, transformations, database loading, and API behavior.",
+
+    "Successfully completed frontend production builds and GitHub Actions CI checks, including dependency security audits.",
+
+    "Implemented reproducible offline ingestion using saved weather snapshots, allowing pipeline testing without requiring live API access."
+  ],
+
+  futureImprovements: [
+    "Extend end-to-end testing to complete yearly datasets across all configured cities and evaluate ingestion performance and data coverage.",
+
+    "Introduce scheduled incremental ingestion and monitoring alerts for failed or incomplete pipeline executions.",
+
+    "Add authentication and production-oriented infrastructure configuration before exposing the analytics API publicly.",
+
+    "Explore orchestration with Apache Airflow and distributed processing with Apache Spark if the volume and complexity of the data increase."
+  ],
+},
   {
     slug: "visionai",
     title: "VisionAI",

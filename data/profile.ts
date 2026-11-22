@@ -17,44 +17,41 @@ export const profile = {
   name: "Khalil Lamrabet",
   role: "Engineering Student — Big Data & Artificial Intelligence",
   location: "Lille, France",
-  email: "klamrabeta19@gmail.com",
+  email: "khalil.lamrabet@student.junia.com",
   phone: "+33 7 43 72 14 47",
   linkedin: { label: "linkedin.com/in/khalillam12", url: "https://www.linkedin.com/in/khalillam12" },
   github: { label: "github.com/Xerow42", url: "https://github.com/Xerow42" },
   /** Square, ≥400px source recommended. See README > Profile photo. */
   photo: "/photo.png",
   tagline:
-    "4th-year engineering student at Junia ISEN, specializing in Big Data and Artificial Intelligence, building software systems that combine data, machine learning and modern web technologies.",
-  /** Longer narrative for the About page. Kept general on personal details
-   *  (no specific sport, club or achievement was provided) rather than
-   *  invented for color. */
+  "Fourth-year engineering student at JUNIA ISEN, specializing in Big Data and Artificial Intelligence. I build data pipelines, machine-learning applications, and full-stack tools — turning ideas and raw data into working software.",
+   
   aboutParagraphs: [
-    "I'm a fourth-year engineering student at Junia ISEN, specializing in Big Data and Artificial Intelligence. What drew me to this path is the same thing that keeps me in it: I like taking a system apart to understand how each piece — the data, the model, the interface — actually works, and then putting it back together as something that runs reliably end to end.",
-    "That curiosity spans the stack. On the data side, I've built pipelines that validate and load real data into PostgreSQL, and models that classify text and detect objects using TensorFlow, scikit-learn and pretrained computer-vision models. On the software side, I design relational schemas, build REST APIs with FastAPI and Flask, and ship the React and Next.js interfaces on top of them. I'm most interested in where these two worlds meet: systems where the engineering has to be solid enough for the intelligence to be useful.",
-    "Outside of coursework, I hold myself to a disciplined athletic routine, and it shapes how I work as much as how I train: showing up consistently, tracking progress honestly, and improving in small, deliberate steps rather than expecting a breakthrough overnight. I bring that same mindset to engineering — building things I can actually verify work, one tested component at a time — and I'm looking for an internship where I can apply it to real, production-scale problems in Big Data, AI or software engineering.",
-  ],
+  "I'm a fourth-year engineering student at JUNIA ISEN in Lille, specializing in Big Data and Artificial Intelligence. After completing my first three years at JUNIA Maroc, I continued my engineering studies in France to deepen my knowledge of data-driven systems and software development. I've always been curious about how technology works, but what motivates me most is turning that understanding into something practical.",
+
+  "I learn best by building. Through projects like DataFlow, DocuMind, and VisionAI, I've explored different aspects of data engineering, machine learning, computer vision, and full-stack development. I enjoy working across the entire process — understanding a problem, designing a solution, developing it, and verifying that it works. DataFlow, for example, taught me how much reliable data processing, testing, and deployment matter beyond simply writing code.",
+
+  "Outside of engineering, I'm passionate about sports and maintain a disciplined training routine. It has taught me consistency, patience, and the importance of improving through regular effort. I bring the same mindset to my technical projects. I'm currently looking for an internship where I can contribute, learn from experienced engineers, and challenge myself on real-world problems in Data Engineering, AI, or Software Engineering. I'm based in Lille and open to opportunities across France and Belgium.",
+],
   targetRoles: [
-    "Big Data",
-    "Data Engineering",
-    "Artificial Intelligence",
-    "Machine Learning",
-    "Data Science",
-    "Software Engineering",
-    "Full Stack Development",
-    "Information Systems",
-  ],
+  "Data Engineering",
+  "Artificial Intelligence",
+  "Machine Learning Engineering",
+  "Data Science",
+  "Software Engineering",
+],
 } as const;
 
 export const education: TimelineEntry[] = [
   {
-    period: "2023 — present",
-    title: "Engineering degree, 4th year (Master's 1 level) — Big Data & Artificial Intelligence",
-    org: "Junia ISEN — Graduate School of Engineering",
-    location: "Lille, France",
-    bullets: [
-      "Coursework and projects in machine learning, data engineering, algorithms, databases and software engineering.",
-    ],
-  },
+  period: "2023 — present",
+  title: "Engineering Degree (Bac+5), 4th Year — Big Data & Artificial Intelligence",
+  org: "JUNIA ISEN / JUNIA Maroc",
+  location: "Rabat, Morocco (2023–2026) · Lille, France (2026–present)",
+  bullets: [
+    "Engineering curriculum covering machine learning, data engineering, algorithms, databases, and software development.",
+  ],
+},
   {
     period: "2022 — 2023",
     title: "Scientific Baccalaureate, Physics-Chemistry (PC) — Highest honours (Mention Très Bien)",
@@ -107,29 +104,35 @@ export const skills: SkillGroup[] = [
     items: ["FastAPI", "Flask", "Node.js", "REST API"],
   },
   {
-    label: "Databases & Data Engineering",
-    items: ["PostgreSQL", "MySQL", "SQLite", "Pandas", "Conceptual / logical data modeling (MCD/MLD)"],
-  },
+  label: "Databases & Data Engineering",
+  items: [
+    "PostgreSQL",
+    "MySQL",
+    "SQLite",
+    "SQL",
+    "Pandas",
+    "ETL Pipelines",
+    "Data Validation & Cleaning",
+    "Data Modeling (MCD/MLD)",
+  ],
+},
   {
-    label: "Artificial Intelligence & Machine Learning",
-    items: [
-      "Machine Learning",
-      "Supervised / Unsupervised Learning",
-      "Regression",
-      "Classification",
-      "Natural Language Processing (NLP)",
-      "Sentiment Analysis",
-      "Computer Vision / Image Processing (OpenCV)",
-      "OCR (EasyOCR)",
-      "TensorFlow / Keras",
-      "PyTorch (Ultralytics YOLO)",
-      "scikit-learn",
-      "TF-IDF",
-      "Linear Algebra",
-      "Multivariate Calculus",
-      "Principal Component Analysis (PCA)",
-    ],
-  },
+  label: "Artificial Intelligence & Machine Learning",
+  items: [
+    "Machine Learning",
+    "Classification & Regression",
+    "Natural Language Processing (NLP)",
+    "Sentiment Analysis",
+    "Computer Vision",
+    "OpenCV",
+    "EasyOCR",
+    "TensorFlow / Keras",
+    "Ultralytics YOLO",
+    "scikit-learn",
+    "TF-IDF",
+    "Principal Component Analysis (PCA)",
+  ],
+},
   {
     label: "Tools & Development Environment",
     items: ["Git", "Docker", "Linux", "VS Code", "pgAdmin", "phpMyAdmin", "Automated testing (pytest, unittest)"],
